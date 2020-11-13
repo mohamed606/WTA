@@ -1,7 +1,7 @@
 package com.company;
 
 public class Weapons {
-    private String name;
+    private final String name;
     private int indexInMatrix;
 
     public String getName() {

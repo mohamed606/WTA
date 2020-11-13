@@ -7,14 +7,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
-        // tank 2
-        // tank, 2
-        //w =  new Weopens(tank)
-        // w.setIndex(index)
-        /* for(int i=0 ; i<2 ; i++){
-            rowInMatrix.add(w)
-        */
         int numberOfTargets;
         String inputString = "ok";
         List<Double> threatCoefficient = new ArrayList<>();
@@ -22,18 +14,18 @@ public class Main {
         List<String> inputs = new ArrayList<>();
         List<Weapons> weapons = new ArrayList<>();
         int index = 0;
-        int numberOfWeapons =0 ;
+        int numberOfWeapons = 0;
         double[][] matrix;
         while (true) {
             inputString = input.nextLine();
-            if(inputString.equals("x")){
+            if (inputString.equals("x")) {
                 break;
             }
             String[] split = inputString.split(" ");
             int quantity = Integer.parseInt(split[1]);
             numberOfWeapons += quantity;
             for (int i = 0; i < quantity; i++) {
-                Weapons weapon = new Weapons(split[0]);
+                Weapons weapon = new Weapons(split[0] + " #" + (i + 1));
                 weapon.setIndexInMatrix(index);
                 weapons.add(weapon);
             }
@@ -53,21 +45,8 @@ public class Main {
             }
         }
         System.out.println("Please wait while running the GA ");
-        GA ga = new GA(numberOfTargets, numberOfWeapons, threatCoefficient, matrix, weapons);
+        WTA wta = new WTA(numberOfTargets, numberOfWeapons, threatCoefficient, matrix, weapons);
+        GA ga = new GA(8, 0.56, 0.1, 10, wta);
         ga.start();
-
     }
-    /*
-    t 2
-a 1
-g 2
-x
-     */
-    /*
-     */
-    /*
-    0.3 0.6 0.5
-0.4 0.5 0.4
-0.1 0.2 0.2
-     */
 }
