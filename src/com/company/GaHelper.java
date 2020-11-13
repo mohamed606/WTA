@@ -15,5 +15,5 @@ public interface GaHelper<T> {
 
     void printPhenotype(T chromosome, double fitness);
 
-    void printPhenotypeAfterIterations(List<T> chromosomes);
+    void printPhenotypeAfterIterations(List<T> chromosomes, List<Double>fitness);
 }

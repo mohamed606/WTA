@@ -93,7 +93,7 @@ public class GA<T> {
                 break;
             }
             if (i == iterationNumber - 1) {
-                helper.printPhenotypeAfterIterations(chromosomes);
+                helper.printPhenotypeAfterIterations(chromosomes, populationFitness);
             }
         }
     }

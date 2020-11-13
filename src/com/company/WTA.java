@@ -160,8 +160,7 @@ public class WTA implements GaHelper<Integer[]> {
     }
 
     @Override
-    public void printPhenotypeAfterIterations(List<Integer[]> chromosomes) {
-        List<Double> fitness = calculatePopulationFitness(chromosomes);
+    public void printPhenotypeAfterIterations(List<Integer[]> chromosomes, List<Double>fitness) {
         int index = 0;
         double min = Double.MAX_VALUE;
         for (int i = 0; i < fitness.size(); i++) {
