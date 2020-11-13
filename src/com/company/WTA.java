@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WTA implements GaHelper<int[]> {
+public class WTA implements GaHelper<Integer[]> {
     private final int numberOfTargets;
     private final int numberOfWeapons;
     private final List<Double> targetsThreatCoefficient;
@@ -30,11 +30,11 @@ public class WTA implements GaHelper<int[]> {
     }
 
     @Override
-    public List<int[]> generatePopulation(int populationSize) {
+    public List<Integer[]> generatePopulation(int populationSize) {
         Random random = new Random();
-        List<int[]> chromosomes = new ArrayList<>();
+        List<Integer[]> chromosomes = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            int[] chromosome = new int[numberOfTargets * numberOfWeapons];
+           Integer[] chromosome = new Integer[numberOfTargets * numberOfWeapons];
             for (int j = 0; j < chromosome.length; j++) {
                 chromosome[j] = random.nextInt(2);
             }
@@ -45,7 +45,7 @@ public class WTA implements GaHelper<int[]> {
     }
 
     @Override
-    public void checkAndFix(int[] chromosome) {
+    public void checkAndFix(Integer[] chromosome) {
         List<Integer> indexes = new ArrayList<>();
         int counter = 0;
         for (int i = 0; i < chromosome.length; i++) {
@@ -73,15 +73,15 @@ public class WTA implements GaHelper<int[]> {
     }
 
     @Override
-    public List<Double> calculatePopulationFitness(List<int[]> chromosomes) {
+    public List<Double> calculatePopulationFitness(List<Integer[]> chromosomes) {
         List<Double> fitness = new ArrayList<>();
-        for (int[] chromosome : chromosomes) {
+        for (Integer[] chromosome : chromosomes) {
             fitness.add(calculateFitnessForChromosome(chromosome));
         }
         return fitness;
     }
 
-    private double calculateFitnessForChromosome(int[] chromosome) {
+    private double calculateFitnessForChromosome(Integer[] chromosome) {
         int counter = 0;
         int weapon = 0;
         double[] copyOfTargetCoefficient = new double[numberOfTargets];
@@ -109,9 +109,9 @@ public class WTA implements GaHelper<int[]> {
     }
 
     @Override
-    public void mutation(List<int[]> chromosomes, double mutationProb) {
+    public void mutation(List<Integer[]> chromosomes, double mutationProb) {
 
-        for (int[] chromosome : chromosomes) {
+        for (Integer[] chromosome : chromosomes) {
             for (int j = 0; j < chromosome.length; j++) {
                 if (Math.random() < mutationProb) {
                     if (chromosome[j] == 1) {
@@ -143,7 +143,7 @@ public class WTA implements GaHelper<int[]> {
     }
 
     @Override
-    public void printPhenotype(int[] chromosome, double fitness) {
+    public void printPhenotype(Integer[] chromosome, double fitness) {
         int counter = 0;
         int index = 0;
         for (int j : chromosome) {
@@ -160,7 +160,7 @@ public class WTA implements GaHelper<int[]> {
     }
 
     @Override
-    public void printPhenotypeAfterIterations(List<int[]> chromosomes) {
+    public void printPhenotypeAfterIterations(List<Integer[]> chromosomes) {
         List<Double> fitness = calculatePopulationFitness(chromosomes);
         int index = 0;
         double min = Double.MAX_VALUE;

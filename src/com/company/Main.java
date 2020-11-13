@@ -46,7 +46,7 @@ public class Main {
         }
         System.out.println("Please wait while running the GA ");
         WTA wta = new WTA(numberOfTargets, numberOfWeapons, threatCoefficient, matrix, weapons);
-        GA ga = new GA(8, 0.56, 0.1, 10, wta);
+        GA<Integer> ga = new GA<>(8, 0.56, 0.1, 10, wta);
         ga.start();
     }
 }

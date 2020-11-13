@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GA {
-    private List<int[]> chromosomes;
+public class GA<T> {
+    private List<T[]> chromosomes;
     private List<Double> populationFitness;
     private final List<Integer> matingPool;
-    private int populationSize;
-    private double crossOverProb;
-    private final List<int[]> newGeneration;
-    private double mutationProb;
-    private int iterationNumber;
+    private final int populationSize;
+    private final double crossOverProb;
+    private List<T[]> newGeneration;
+    private final double mutationProb;
+    private final int iterationNumber;
     private final GaHelper helper;
 
     public GA(int populationSize, double crossOverProb, double mutationProb, int iterationNumber, GaHelper gaHelper) {
-        chromosomes = new ArrayList<>();
-        populationFitness = new ArrayList<>();
         matingPool = new ArrayList<>();
         newGeneration = new ArrayList<>();
         this.populationSize = populationSize;
@@ -60,12 +58,12 @@ public class GA {
     private void startMating() {
         Random random = new Random();
         while (!matingPool.isEmpty()) {
-            int[] parent1 = chromosomes.get(matingPool.remove(0));
-            int[] parent2 = chromosomes.get(matingPool.remove(0));
+            T[] parent1 = chromosomes.get(matingPool.remove(0));
+            T[] parent2 = chromosomes.get(matingPool.remove(0));
             if (Math.random() <= crossOverProb) {
                 int crossOverPoint = random.nextInt(parent1.length - 2) + 1;
-                int[] child1 = parent1;
-                int[] child2 = parent2;
+                T[] child1 = parent1;
+                T[] child2 = parent2;
                 for (int i = crossOverPoint; i < parent1.length; i++) {
                     child1[i] = parent2[i];
                     child2[i] = parent1[i];
@@ -87,14 +85,16 @@ public class GA {
             startMating();
             helper.mutation(newGeneration, mutationProb);
             chromosomes = newGeneration;
-            newGeneration.clear();
+            newGeneration = new ArrayList<>();
             populationFitness = helper.calculatePopulationFitness(chromosomes);
             int solutionIndex = helper.stoppingCondition(populationFitness);
             if (solutionIndex != -1) {
                 helper.printPhenotype(chromosomes.get(solutionIndex), populationFitness.get(solutionIndex));
                 break;
             }
+            if (i == iterationNumber - 1) {
+                helper.printPhenotypeAfterIterations(chromosomes);
+            }
         }
-        helper.printPhenotypeAfterIterations(chromosomes);
     }
 }
