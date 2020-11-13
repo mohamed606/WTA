@@ -1,6 +1,6 @@
 package com.company;
 
-public class Weopens {
+public class Weapons {
     private String name;
     private int indexInMatrix;
 
@@ -16,7 +16,7 @@ public class Weopens {
         this.indexInMatrix = indexInMatrix;
     }
 
-    public Weopens(String name) {
+    public Weapons(String name) {
         this.name = name;
     }
 }
